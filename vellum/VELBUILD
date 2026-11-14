@@ -1,0 +1,59 @@
+maintainer="Ampleforth <213837259+Ampleforth@users.noreply.github.com>"
+pkgname=nextcloud-calendar
+pkgver=0.3.0
+pkgrel=0
+upstream_author="Ampleforth"
+category="apps"
+pkgdesc="Nextcloud calendar and tasks for reMarkable 1/2 and Paper Pro/Move"
+url="https://github.com/Ampleforth/reMarkable-nexxtcloudCalendar"
+arch="armv7 aarch64"
+license="GPL-3.0-only"
+depends="appload>=0.5.3"
+options="!check !fhs !strip"
+readmeurl="https://raw.githubusercontent.com/$upstream_author/reMarkable-nexxtcloudCalendar/v$pkgver/README.md"
+source="$url/releases/download/v$pkgver/nextcloud-calendar-$pkgver-source.tar.gz"
+builddir="$srcdir/nextcloud-calendar-$pkgver-source"
+image="ghcr.io/toltec-dev/golang:v4.0"
+
+build() {
+    apt-get update
+    apt-get install -y --no-install-recommends qt6-base-dev librsvg2-bin python3
+    cd "$builddir"
+    case "$CARCH" in
+        armv7) _target=arm ;;
+        aarch64) _target=arm64 ;;
+        *) echo "Unsupported CARCH: $CARCH" >&2; return 1 ;;
+    esac
+    GOFLAGS=-mod=vendor GOTOOLCHAIN=auto RCC="${RCC:-/usr/lib/qt6/libexec/rcc}" \
+        CALENDAR_GOARCH="$_target" ./scripts/build.sh
+}
+
+package() {
+    case "$CARCH" in
+        armv7) _output=nextcloud-calendar ;;
+        aarch64) _output=nextcloud-calendar-arm64 ;;
+        *) return 1 ;;
+    esac
+    local bundle="$builddir/dist/$_output"
+    local dest="$pkgdir/home/root/xovi/exthome/appload/nextcloud-calendar"
+    local notices="$pkgdir/home/root/.vellum/licenses/$pkgname"
+    local file
+    install -Dm755 "$bundle/backend/entry" "$dest/backend/entry"
+    for file in manifest.json resources.rcc icon.png VERSION architecture SOURCE.txt LICENSE LICENSE.upstream.md THIRD_PARTY_NOTICES.md; do
+        install -Dm644 "$bundle/$file" "$dest/$file"
+    done
+    for file in "$bundle"/licenses/*; do
+        install -Dm644 "$file" "$dest/licenses/${file##*/}"
+        install -Dm644 "$file" "$notices/licenses/${file##*/}"
+    done
+    for file in "$bundle"/xovi/*.qmd; do
+        install -Dm644 "$file" "$dest/xovi/${file##*/}"
+    done
+    for file in LICENSE LICENSE.upstream.md THIRD_PARTY_NOTICES.md; do
+        install -Dm644 "$bundle/$file" "$notices/$file"
+    done
+    printf '%s\n' "$url/releases/download/v$pkgver/nextcloud-calendar-$pkgver-source.tar.gz" > "$notices/SOURCES"
+}
+
+sha512sums='3505aa84ee7fa7bfa17b2200192dddc9075535de95f376a6b220b91e89fea29cf5d6eff6236a1ec4a7592551eede0ed099b0563e2029a761787d5b989d43b1a0
+ nextcloud-calendar-0.3.0-source.tar.gz'
