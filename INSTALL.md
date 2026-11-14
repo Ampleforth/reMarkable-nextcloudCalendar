@@ -16,7 +16,7 @@ The build matches the **tablet**, not your computer. An Apple Silicon Mac still
 uses `armv7` when installing onto RM1/RM2. An Intel/AMD Windows PC still uses
 `aarch64` for Paper Pro/Move.
 
-Download from the project's [Releases page](https://github.com/Ampleforth/reMarkable-nexxtcloudCalendar/releases/latest).
+Download from the project's [Releases page](https://github.com/Ampleforth/reMarkable-nextcloudCalendar/releases/latest).
 Use the archive whose name ends in your tablet architecture and the matching
 `SHA256SUMS` from that same release. ZIP is convenient on Windows; either ZIP or
 `.tar.gz` works on macOS/Linux. Use the named architecture-specific install archive;
@@ -58,7 +58,7 @@ Keep all files from the extracted archive together.
    extracted folder. For example, substitute the actual version/folder name:
 
    ```powershell
-   cd "$HOME\Downloads\reMarkable-nexxtcloudCalendar-v0.3.0-armv7"
+   cd "$HOME\Downloads\reMarkable-nextcloudCalendar-v0.3.1-armv7"
    ```
 
 4. Check that the OpenSSH client is available:
@@ -81,7 +81,7 @@ Keep all files from the extracted archive together.
    `SHA256SUMS`:
 
    ```powershell
-   Get-FileHash "$HOME\Downloads\reMarkable-nexxtcloudCalendar-v0.3.0-armv7.zip" -Algorithm SHA256
+   Get-FileHash "$HOME\Downloads\reMarkable-nextcloudCalendar-v0.3.1-armv7.zip" -Algorithm SHA256
    ```
 
 6. Test access to your tablet, substituting its address:
@@ -127,7 +127,7 @@ Keep all files from the extracted archive together.
 
    ```sh
    cd ~/Downloads
-   shasum -a 256 reMarkable-nexxtcloudCalendar-v0.3.0-armv7.tar.gz
+   shasum -a 256 reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
    ```
 
    Compare the result to its line in `SHA256SUMS`. For Paper Pro/Move, substitute
@@ -135,8 +135,8 @@ Keep all files from the extracted archive together.
 3. Extract it and enter the extracted directory:
 
    ```sh
-   tar -xzf reMarkable-nexxtcloudCalendar-v0.3.0-armv7.tar.gz
-   cd reMarkable-nexxtcloudCalendar-v0.3.0-armv7
+   tar -xzf reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
+   cd reMarkable-nextcloudCalendar-v0.3.1-armv7
    ```
 
 4. Confirm SSH is available, then test the tablet connection:
@@ -185,15 +185,15 @@ Keep all files from the extracted archive together.
 
    ```sh
    cd ~/Downloads
-   sha256sum reMarkable-nexxtcloudCalendar-v0.3.0-armv7.tar.gz
+   sha256sum reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
    ```
 
    Substitute `aarch64` in the filename for Paper Pro/Move.
 4. Extract and enter the directory:
 
    ```sh
-   tar -xzf reMarkable-nexxtcloudCalendar-v0.3.0-armv7.tar.gz
-   cd reMarkable-nexxtcloudCalendar-v0.3.0-armv7
+   tar -xzf reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
+   cd reMarkable-nextcloudCalendar-v0.3.1-armv7
    ```
 
 5. Test SSH to the tablet, enter its password, and return with `exit`:
@@ -230,7 +230,7 @@ Keep all files from the extracted archive together.
    Qt resource rebuilder and AppLoad for your tablet/firmware; allow dependencies.
 4. Refresh the package list and search for **Nextcloud Calendar** / `nextcloud-calendar`.
 5. Check the displayed version and supported architecture before installing.
-   The catalogue may lag this project's GitHub release. If **0.3.0** is not yet
+   The catalogue may lag this project's GitHub release. If **0.3.1** is not yet
    offered for your architecture, use the matching manual download above for
    these features; do not assume an older package contains them.
 6. If the current version is available, install/update it and accept required
@@ -262,7 +262,7 @@ architecture. The app ID and package name remain unchanged after the repository 
 
    For an installed Vellum package, an ordinary Vellum upgrade also updates it
    once the catalogue provides the newer version. If the catalogue is older,
-   use the manual download for 0.3.0 instead of expecting new features from it.
+   use the manual download for 0.3.1 instead of expecting new features from it.
 5. Allow dependencies, follow any XOVI reload prompt, then open the app.
 6. If switching from a manual install to Vellum, close the app and keep a backup
    first; both methods use the same app/data directories. Do not mix installers

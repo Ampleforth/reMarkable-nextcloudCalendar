@@ -1,2 +1,2 @@
 Corresponding source is available in the same-version source download on GitHub Releases.
-Project: https://github.com/Ampleforth/reMarkable-nexxtcloudCalendar
+Project: https://github.com/Ampleforth/reMarkable-nextcloudCalendar

@@ -31,7 +31,7 @@ The full upstream license is in each bundle's
 
 The complete corresponding application source for each distributed version is
 available in the matching `nextcloud-calendar-VERSION-source.tar.gz` download on
-[GitHub Releases](https://github.com/Ampleforth/reMarkable-nexxtcloudCalendar/releases).
+[GitHub Releases](https://github.com/Ampleforth/reMarkable-nextcloudCalendar/releases).
 The Vellum recipe compiles that source; it does not repackage the prebuilt app.
 
 This is an independent community project, not affiliated with reMarkable or

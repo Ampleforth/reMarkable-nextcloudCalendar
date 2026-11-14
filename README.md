@@ -12,7 +12,7 @@
 - **Pending import count:** **3 Pending Task Imports** or **1 Pending Task Import** reflects the actual waiting queue, updates automatically, and disappears at zero. On color devices it is light red with black text and outline. Import sits to the left of Tasks; Tasks stays at the far right.
 - **Offline work and direct Nextcloud sync:** cache data on the tablet, queue edits offline, and upload with Sync. Conflicts are shown instead of silently overwriting server changes. Settings include 12/24-hour time and a masked app-password field.
 
-**[Download the latest version](https://github.com/Ampleforth/reMarkable-nexxtcloudCalendar/releases/latest)** · **[Step-by-step installation](INSTALL.md)** · **[Credits and licenses](CREDITS.md)**
+**[Download the latest version](https://github.com/Ampleforth/reMarkable-nextcloudCalendar/releases/latest)** · **[Step-by-step installation](INSTALL.md)** · **[Credits and licenses](CREDITS.md)**
 
 ## Supported devices
 

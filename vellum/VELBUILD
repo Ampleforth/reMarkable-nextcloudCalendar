@@ -1,16 +1,16 @@
 maintainer="Ampleforth <213837259+Ampleforth@users.noreply.github.com>"
 pkgname=nextcloud-calendar
-pkgver=0.3.0
+pkgver=0.3.1
 pkgrel=0
 upstream_author="Ampleforth"
 category="apps"
 pkgdesc="Nextcloud calendar and tasks for reMarkable 1/2 and Paper Pro/Move"
-url="https://github.com/Ampleforth/reMarkable-nexxtcloudCalendar"
+url="https://github.com/Ampleforth/reMarkable-nextcloudCalendar"
 arch="armv7 aarch64"
 license="GPL-3.0-only"
 depends="appload>=0.5.3"
 options="!check !fhs !strip"
-readmeurl="https://raw.githubusercontent.com/$upstream_author/reMarkable-nexxtcloudCalendar/v$pkgver/README.md"
+readmeurl="https://raw.githubusercontent.com/$upstream_author/reMarkable-nextcloudCalendar/v$pkgver/README.md"
 source="$url/releases/download/v$pkgver/nextcloud-calendar-$pkgver-source.tar.gz"
 builddir="$srcdir/nextcloud-calendar-$pkgver-source"
 image="ghcr.io/toltec-dev/golang:v4.0"
@@ -55,5 +55,5 @@ package() {
     printf '%s\n' "$url/releases/download/v$pkgver/nextcloud-calendar-$pkgver-source.tar.gz" > "$notices/SOURCES"
 }
 
-sha512sums='3505aa84ee7fa7bfa17b2200192dddc9075535de95f376a6b220b91e89fea29cf5d6eff6236a1ec4a7592551eede0ed099b0563e2029a761787d5b989d43b1a0
- nextcloud-calendar-0.3.0-source.tar.gz'
+sha512sums='ec502d1a74c37f5b006635ad7440149752c79bb22a5b2d8b923df3bab2e4818b713f280dc88da624858197bc645861a33dd2520d28acf731c71e8b526832e2ba
+ nextcloud-calendar-0.3.1-source.tar.gz'
