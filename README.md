@@ -79,7 +79,7 @@ Open any image to view its original resolution.
 
 ## Install and connect
 
-Use **[INSTALL.md](INSTALL.md)** for complete Windows, macOS, Linux, Vellum and reManager instructions. No compiler is required for manual installation. This repository contains installation bundles and packaging metadata; matching application source is supplied as a separate download on the same release.
+Use **[INSTALL.md](INSTALL.md)** for complete Windows, macOS, Linux, Vellum and reManager instructions. No compiler is required for manual installation. This repository contains installation bundles, packaging metadata, and application source. For 0.3.1, use the `v0.3.1-source` tag for repository source and see [SOURCE-README.md](SOURCE-README.md) for build instructions. The original source attachment remains available on the same release.
 
 After installation, open **AppLoad → Nextcloud Calendar → Settings**, enter your Nextcloud HTTPS base URL, username and app password, then **Save & sync**. Select the calendars/task lists you want to see.
 
