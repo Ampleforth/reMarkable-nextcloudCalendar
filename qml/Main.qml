@@ -272,7 +272,7 @@ Rectangle {
                 }
             }
             Row {anchors.right:parent.right;y:root.movePortrait?74:0;spacing:12
-                Action {objectName:"importLassoTask";color:Theme.colorDisplay?"#f8d7da":(!enabled?"#f7f7f7":"#e9e9e9");border.color:Theme.colorDisplay||enabled?"black":"#aaaaaa";width:root.movePortrait?header.width-212:290;label:root.pendingCaptureCount+" Pending Task Import"+(root.pendingCaptureCount===1?"":"s");visible:root.pendingCaptureCount>0;enabled:!root.status.busy;onTriggered:root.openCapture()}
+                Action {objectName:"importLassoTask";color:Theme.colorDisplay?"#ff79c6":(!enabled?"#f7f7f7":"#e9e9e9");border.color:Theme.colorDisplay||enabled?"black":"#aaaaaa";width:root.movePortrait?header.width-212:290;label:root.pendingCaptureCount+" Pending Task Import"+(root.pendingCaptureCount===1?"":"s");visible:root.pendingCaptureCount>0;enabled:!root.status.busy;onTriggered:root.openCapture()}
                 Action {objectName:"tasksNavigation";width:root.movePortrait?200:145;label:"Tasks";selected:root.view==="tasks";onTriggered:root.changeView("tasks")}
             }
         }
@@ -305,7 +305,7 @@ Rectangle {
                 color:day.getMonth()===root.selected.getMonth()?"white":"#eeeeee"
                 Text {x:12;y:12;text:monthCell.day.getDate();font.pixelSize:28;font.bold:root.iso(monthCell.day)===root.iso(new Date());color:"black"}
                 Column {x:8;y:52;width:parent.width-16;spacing:8
-                    Repeater {model:root.eventsOn(monthCell.day).slice(0,Math.max(0,Math.floor((monthCell.height-84)/42)));delegate:Text {required property var modelData;width:parent.width;text:modelData.title;font.weight:Font.DemiBold;font.pixelSize:18;maximumLineCount:2;wrapMode:Text.Wrap;elide:Text.ElideRight;leftPadding:root.moveMode?4:0;color:root.moveMode?"black":Theme.calendarEdge(modelData.calendar,"black");Rectangle{anchors.fill:parent;z:-1;visible:root.moveMode&&Theme.colorDisplay;radius:5;color:Theme.calendarFill(modelData.calendar,"transparent")}}}
+                    Repeater {model:root.eventsOn(monthCell.day).slice(0,Math.max(0,Math.floor((monthCell.height-84)/42)));delegate:Text {required property var modelData;width:parent.width;text:modelData.title;font.weight:Font.DemiBold;font.pixelSize:18;maximumLineCount:2;wrapMode:Text.Wrap;elide:Text.ElideRight;leftPadding:(root.moveMode||Theme.colorDisplay)?4:0;color:"black";Rectangle{anchors.fill:parent;z:-1;visible:Theme.colorDisplay;radius:5;color:Theme.calendarFill(modelData.calendar,"transparent")}}}
                 }
                 Text {anchors.bottom:parent.bottom;anchors.right:parent.right;anchors.margins:8;text:root.eventsOn(monthCell.day).length?root.eventsOn(monthCell.day).length+" events":"";font.weight:Font.DemiBold;font.pixelSize:14;color:"black"}
             }}

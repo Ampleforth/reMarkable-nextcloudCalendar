@@ -53,7 +53,7 @@ Item {
             delegate: Rectangle {
                 required property var modelData
                 width: timeline.dayWidth; height: headings.height
-                radius:10;color: modelData.key === app.iso(new Date()) ? (Theme.colorDisplay?"#d2eafb":"black") : "#eeeeee"
+                radius:10;color: modelData.key === app.iso(new Date()) ? (Theme.colorDisplay?"#bd93f9":"black") : "#eeeeee"
                 border.color: "#cccccc"
                 Text {
                     anchors.centerIn: parent
@@ -61,7 +61,7 @@ Item {
                     horizontalAlignment: Text.AlignHCenter
                     font.pixelSize: timeline.dayCount === 7 ? 24 : 28
                     font.bold: true
-                    color: modelData.key === app.iso(new Date()) ? (Theme.colorDisplay?"#004b78":"white") : "black"
+                    color: modelData.key === app.iso(new Date()) ? (Theme.colorDisplay?"black":"white") : "black"
                 }
             }
         }
