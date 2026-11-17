@@ -447,7 +447,10 @@ func (s *Store) queue(e Edit, loc *time.Location) error {
 				if err != nil {
 					return err
 				}
-				if !t.After(start) || dateOnly != (p.ValueType() == ical.ValueDate) {
+				// A whole-day task may be due on the day it is scheduled (Nextcloud Tasks and other clients write
+				// these); timed tasks still need the due time after the start.
+				early := t.Before(start) || (!dateOnly && t.Equal(start))
+				if early || dateOnly != (p.ValueType() == ical.ValueDate) {
 					return errors.New("task due date must follow its existing start with the same date type")
 				}
 			}

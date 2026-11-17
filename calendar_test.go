@@ -369,3 +369,34 @@ func TestLostLocalSaveResponseDoesNotDuplicateCreation(t *testing.T) {
 		t.Fatal("duplicate offline creation")
 	}
 }
+
+// A whole-day task scheduled and due on the same day (as Nextcloud Tasks and other clients write them) can be
+// completed; before, every save failed with "task due date must follow its existing start".
+func TestCompleteSameDayWholeDayTask(t *testing.T) {
+	s, c := testStore(t)
+	url := c.ID + "00c7a41a.ics"
+	s.state.Resources = map[string]Resource{url: {URL: url, Calendar: c.ID, ETag: `"1"`, Data: strings.Join([]string{
+		"BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Nextcloud MCP Server//EN", "BEGIN:VTODO",
+		"CREATED:20261117T030737Z", "DESCRIPTION:", "DTSTAMP:20261117T030737Z", "DTSTART;VALUE=DATE:20261113",
+		"DUE;VALUE=DATE:20261113", "LAST-MODIFIED:20261117T030737Z", "PERCENT-COMPLETE:0", "PRIORITY:0",
+		"STATUS:NEEDS-ACTION", "SUMMARY:Laundry", "UID:00c7a41a-ba20-4b99-8b70-1c271feca898", "END:VTODO",
+		"END:VCALENDAR", ""}, "\r\n")}}
+	items := mustItems(t, s)
+	if len(items) != 1 || items[0].Scheduled != "2026-11-13" || items[0].Due != "2026-11-13" {
+		t.Fatalf("task not read: %+v", items)
+	}
+	e := Edit{Item: items[0]}
+	e.Completed = true
+	if err := s.queue(e, time.UTC); err != nil {
+		t.Fatal(err)
+	}
+	if i := mustItems(t, s)[0]; !i.Completed || i.Due != "2026-11-13" || i.Scheduled != "2026-11-13" {
+		t.Fatalf("not completed or dates changed: %+v", i)
+	}
+	// a due date before the start is still refused
+	e = Edit{Item: mustItems(t, s)[0]}
+	e.Due = "2026-11-12"
+	if err := s.queue(e, time.UTC); err == nil {
+		t.Fatal("due before start was accepted")
+	}
+}
