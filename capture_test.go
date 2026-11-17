@@ -129,3 +129,22 @@ func TestDiscardCapturePersistenceFailurePreservesCapture(t *testing.T) {
 		t.Fatalf("capture lost: %v %v", remaining, err)
 	}
 }
+
+// Firmware 3.29.1.0 (Paper Pro Move) writes source_doc_uuid as an object: the capture still imports.
+func TestCaptureObjectDocumentID(t *testing.T) {
+	s, _ := testStore(t)
+	if _, err := s.captures(); err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(filepath.Dir(s.path), "intake", "cap_1794877092356.json")
+	if err := os.WriteFile(path, []byte(`{"summary":"test","source_doc_uuid":{},"source_page_key":"idx:0","source_label":"Notebook 10 · p.1","captured_at":"2026-11-17T00:58:12.355Z"}`), 0600); err != nil {
+		t.Fatal(err)
+	}
+	captures, err := s.captures()
+	if err != nil || len(captures) != 1 || captures[0].Summary != "test" {
+		t.Fatalf("captures: %v %v", captures, err)
+	}
+	if !strings.Contains(captures[0].Description, "Notebook: \n") {
+		t.Fatalf("description: %q", captures[0].Description)
+	}
+}

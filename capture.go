@@ -54,7 +54,9 @@ func (s *Store) captures() ([]Capture, error) {
 		}
 		var v struct {
 			Summary  string `json:"summary"`
-			Document string `json:"source_doc_uuid"`
+			// Firmware 3.29 hands the hook a document object here, not a string: keep the
+			// capture and leave the notebook id out rather than rejecting it.
+			Document json.RawMessage `json:"source_doc_uuid"`
 			Page     string `json:"source_page_key"`
 			Label    string `json:"source_label"`
 			Captured string `json:"captured_at"`
@@ -65,7 +67,9 @@ func (s *Store) captures() ([]Capture, error) {
 		if strings.TrimSpace(v.Summary) == "" {
 			return nil, fmt.Errorf("capture %s has no task text", entry.Name())
 		}
-		result = append(result, Capture{ID: id, Summary: v.Summary, Description: fmt.Sprintf("Captured from %s\nNotebook: %s\nPage: %s\nCaptured: %s", v.Label, v.Document, v.Page, v.Captured)})
+		var document string
+		_ = json.Unmarshal(v.Document, &document)
+		result = append(result, Capture{ID: id, Summary: v.Summary, Description: fmt.Sprintf("Captured from %s\nNotebook: %s\nPage: %s\nCaptured: %s", v.Label, document, v.Page, v.Captured)})
 	}
 	return result, nil
 }
