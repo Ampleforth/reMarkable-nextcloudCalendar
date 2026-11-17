@@ -314,7 +314,9 @@ patch the same selection handlers.
    cp /home/root/xovi/exthome/appload/nextcloud-calendar/xovi/nextcloudCalendarSend.qmd /home/root/xovi/exthome/qt-resource-rebuilder/
    ```
 
-4. On exactly 3.27.3.0, optionally enable the Meeting Notes icon shortcut:
+4. On exactly 3.27.3.0, optionally enable the Meeting Notes icon shortcut (on 3.29.1.0, e.g. the
+   Paper Pro Move, use `packaging/xovi/nextcloudCalendarLauncher-3.29.1.0.qmd` from the source instead; the
+   3.27.3.0 hook crashes xochitl there):
 
    ```sh
    cp /home/root/xovi/exthome/appload/nextcloud-calendar/xovi/nextcloudCalendarLauncher.qmd /home/root/xovi/exthome/qt-resource-rebuilder/
