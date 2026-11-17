@@ -1,0 +1,57 @@
+; SPDX-License-Identifier: GPL-3.0-only
+; Switch the meeting-note calendar button between its stock action and AppLoad.
+; Only the non-secret launcher preference is read. No running backend is needed.
+; Ported to 3.29.1.0 (Paper Pro Move): `popup` is now an inline EventsPopup object, so it is switched off with a
+; Binding instead of being rewritten (wrapping an object declaration in `?:` made qmldiff panic).
+VERSION 3.29.1.0
+
+AFFECT /qt/qml/xofm/modules/integrations/calendar/qml/CalendarActions.qml
+    IMPORT net.asivery.AppLoad 1.0
+    TRAVERSE ?#root
+        LOCATE AFTER ALL
+        INSERT {
+            property bool nextcloudCalendarEnabled: true
+            Timer {
+                interval: 1000
+                running: true
+                repeat: true
+                triggeredOnStart: true
+                onTriggered: {
+                    var request =  new  XMLHttpRequest();
+                    request.onreadystatechange = function() {
+                        if (request.readyState !== 4) { return; }
+                        try {
+                            var settings = JSON.parse(request.responseText);
+                            if (typeof settings.enabled === "boolean") {
+                                root.nextcloudCalendarEnabled = settings.enabled;
+                            }
+                        } catch (error) { }
+                    };
+                    request.open("GET", "file:///home/root/.local/share/nextcloud-calendar/launcher.json");
+                    request.send();
+                }
+            }
+            Binding {
+                target: root
+                property: "popup"
+                value: null
+                when: root.nextcloudCalendarEnabled
+            }
+        }
+        REBUILD supportedViews
+            LOCATE BEFORE ALL
+            INSERT STREAM / root.nextcloudCalendarEnabled ? ["myfiles"] : ( /
+            LOCATE AFTER ALL
+            INSERT STREAM / ) /
+        END REBUILD
+        REBUILD onActionClicked
+            LOCATE AFTER STREAM / { /
+            INSERT {
+                if (root.nextcloudCalendarEnabled) {
+                    AppLoadLauncher.launchApplication("org.remarkable.nextcloudcalendar", [], {}, false);
+                    return;
+                }
+            }
+        END REBUILD
+    END TRAVERSE
+END AFFECT

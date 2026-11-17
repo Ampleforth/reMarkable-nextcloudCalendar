@@ -23,7 +23,7 @@
 | reMarkable Paper Pro | `aarch64` | Color accents |
 | reMarkable Paper Pro Move | `aarch64` | Color accents; optional Move layout |
 
-XOVI and AppLoad must match your device and firmware. The standalone RM2 app has been tested on the tablet. Paper Pro/Move builds and layouts have passed off-device checks; physical color-device and rotation validation is still pending. Optional notebook/launcher hooks are firmware-specific; see the installation guide.
+XOVI and AppLoad must match your device and firmware. The standalone RM2 app has been tested on the tablet, and the aarch64 app, color palette, Lasso to Task and Meeting Notes shortcut on a Paper Pro Move (firmware 3.29.1.0). Full-size Paper Pro and rotation validation is still pending. Optional notebook/launcher hooks are firmware-specific; see the installation guide.
 
 ## RM1 / RM2 screenshots
 
@@ -79,7 +79,7 @@ Open any image to view its original resolution.
 
 ## Install and connect
 
-Use **[INSTALL.md](INSTALL.md)** for complete Windows, macOS, Linux, Vellum and reManager instructions. No compiler is required for manual installation. This repository contains installation bundles, packaging metadata, and application source. For 0.3.1, use the `v0.3.1-source` tag for repository source and see [SOURCE-README.md](SOURCE-README.md) for build instructions. The original source attachment remains available on the same release.
+Use **[INSTALL.md](INSTALL.md)** for complete Windows, macOS, Linux, Vellum and reManager instructions. No compiler is required for manual installation. This repository contains installation bundles, packaging metadata, and application source. Repository source for 0.3.2 is the `v0.3.2` tag; see [SOURCE-README.md](SOURCE-README.md) for build instructions. The same source is attached to the release as `nextcloud-calendar-0.3.2-source.tar.gz`.
 
 After installation, open **AppLoad → Nextcloud Calendar → Settings**, enter your Nextcloud HTTPS base URL, username and app password, then **Save & sync**. Select the calendars/task lists you want to see.
 

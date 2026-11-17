@@ -1,11 +1,10 @@
-# Nextcloud Calendar 0.3.1 — corresponding source
+# Nextcloud Calendar 0.3.2 — corresponding source
 
 This source tree contains the application source, vendored Go dependencies, QML,
 licenses, tests, and the scripts used to produce the released app bundles.
-The `v0.3.1-source` tag records the exact source files from the original
-`nextcloud-calendar-0.3.1-source.tar.gz` release attachment, alongside the
-installation bundles and documentation. The existing `v0.3.1` tag is preserved.
-Vellum can build from the GitHub archive of `v0.3.1-source`.
+The `v0.3.2` tag holds this source alongside the installation bundles and
+documentation; the same source files are attached to the release as
+`nextcloud-calendar-0.3.2-source.tar.gz`, which Vellum builds from.
 
 Requirements: Go 1.25+, Qt 6 rcc, rsvg-convert, Python 3.
 

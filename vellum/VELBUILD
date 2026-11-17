@@ -1,6 +1,6 @@
 maintainer="Ampleforth <213837259+Ampleforth@users.noreply.github.com>"
 pkgname=nextcloud-calendar
-pkgver=0.3.1
+pkgver=0.3.2
 pkgrel=0
 upstream_author="Ampleforth"
 category="apps"
@@ -53,6 +53,8 @@ package() {
 		"$dest/xovi/nextcloudCalendarLauncher.qmd"
 	install -Dm644 "$bundle/xovi/nextcloudCalendarSend.qmd" \
 		"$dest/xovi/nextcloudCalendarSend.qmd"
+	install -Dm644 "$bundle/xovi/nextcloudCalendarLauncher-3.29.1.0.qmd" \
+		"$dest/xovi/nextcloudCalendarLauncher-3.29.1.0.qmd"
 
 	install -Dm644 "$bundle/LICENSE" \
 		"$notices/LICENSE"
@@ -72,5 +74,5 @@ package() {
 		"$notices/SOURCES"
 }
 
-sha512sums='ec502d1a74c37f5b006635ad7440149752c79bb22a5b2d8b923df3bab2e4818b713f280dc88da624858197bc645861a33dd2520d28acf731c71e8b526832e2ba
- nextcloud-calendar-0.3.1-source.tar.gz'
+sha512sums='eb61d488061fafd8ed0a3389444e3c06b09480e623425af5c7623d1770cef70bbd4d407b677da0e064ad5874782213377f29b82a0d3c2478a35683b1ed951c9a
+ nextcloud-calendar-0.3.2-source.tar.gz'

@@ -58,7 +58,7 @@ Keep all files from the extracted archive together.
    extracted folder. For example, substitute the actual version/folder name:
 
    ```powershell
-   cd "$HOME\Downloads\reMarkable-nextcloudCalendar-v0.3.1-armv7"
+   cd "$HOME\Downloads\reMarkable-nextcloudCalendar-v0.3.2-armv7"
    ```
 
 4. Check that the OpenSSH client is available:
@@ -81,7 +81,7 @@ Keep all files from the extracted archive together.
    `SHA256SUMS`:
 
    ```powershell
-   Get-FileHash "$HOME\Downloads\reMarkable-nextcloudCalendar-v0.3.1-armv7.zip" -Algorithm SHA256
+   Get-FileHash "$HOME\Downloads\reMarkable-nextcloudCalendar-v0.3.2-armv7.zip" -Algorithm SHA256
    ```
 
 6. Test access to your tablet, substituting its address:
@@ -127,7 +127,7 @@ Keep all files from the extracted archive together.
 
    ```sh
    cd ~/Downloads
-   shasum -a 256 reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
+   shasum -a 256 reMarkable-nextcloudCalendar-v0.3.2-armv7.tar.gz
    ```
 
    Compare the result to its line in `SHA256SUMS`. For Paper Pro/Move, substitute
@@ -135,8 +135,8 @@ Keep all files from the extracted archive together.
 3. Extract it and enter the extracted directory:
 
    ```sh
-   tar -xzf reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
-   cd reMarkable-nextcloudCalendar-v0.3.1-armv7
+   tar -xzf reMarkable-nextcloudCalendar-v0.3.2-armv7.tar.gz
+   cd reMarkable-nextcloudCalendar-v0.3.2-armv7
    ```
 
 4. Confirm SSH is available, then test the tablet connection:
@@ -185,15 +185,15 @@ Keep all files from the extracted archive together.
 
    ```sh
    cd ~/Downloads
-   sha256sum reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
+   sha256sum reMarkable-nextcloudCalendar-v0.3.2-armv7.tar.gz
    ```
 
    Substitute `aarch64` in the filename for Paper Pro/Move.
 4. Extract and enter the directory:
 
    ```sh
-   tar -xzf reMarkable-nextcloudCalendar-v0.3.1-armv7.tar.gz
-   cd reMarkable-nextcloudCalendar-v0.3.1-armv7
+   tar -xzf reMarkable-nextcloudCalendar-v0.3.2-armv7.tar.gz
+   cd reMarkable-nextcloudCalendar-v0.3.2-armv7
    ```
 
 5. Test SSH to the tablet, enter its password, and return with `exit`:
@@ -230,7 +230,7 @@ Keep all files from the extracted archive together.
    Qt resource rebuilder and AppLoad for your tablet/firmware; allow dependencies.
 4. Refresh the package list and search for **Nextcloud Calendar** / `nextcloud-calendar`.
 5. Check the displayed version and supported architecture before installing.
-   The catalogue may lag this project's GitHub release. If **0.3.1** is not yet
+   The catalogue may lag this project's GitHub release. If **0.3.2** is not yet
    offered for your architecture, use the matching manual download above for
    these features; do not assume an older package contains them.
 6. If the current version is available, install/update it and accept required
@@ -262,7 +262,7 @@ architecture. The app ID and package name remain unchanged after the repository 
 
    For an installed Vellum package, an ordinary Vellum upgrade also updates it
    once the catalogue provides the newer version. If the catalogue is older,
-   use the manual download for 0.3.1 instead of expecting new features from it.
+   use the manual download for 0.3.2 instead of expecting new features from it.
 5. Allow dependencies, follow any XOVI reload prompt, then open the app.
 6. If switching from a manual install to Vellum, close the app and keep a backup
    first; both methods use the same app/data directories. Do not mix installers
@@ -295,8 +295,9 @@ permissions `600`, then reopen the app. Do not upload it to GitHub.
 
 ## 5. Enable Lasso to Task and the main-screen shortcut
 
-These optional hooks use private reMarkable UI resources. **Capture targets
-firmware 3.27.x; the launcher hook targets exactly 3.27.3.0.** Check your firmware
+These optional hooks use private reMarkable UI resources. **Capture works on
+firmware 3.27.x and 3.29.1.0 (tested on a Paper Pro Move); the launcher hook has one
+version for exactly 3.27.3.0 and one for exactly 3.29.1.0.** Check your firmware
 before enabling them. The core calendar app can be used without either hook.
 Do not enable reTaskable's capture hook alongside this app's capture hook: both
 patch the same selection handlers.
@@ -305,18 +306,21 @@ patch the same selection handlers.
 2. Open the tablet terminal using SSH or reManager. Check firmware:
 
    ```sh
-   cat /usr/share/remarkable/update.conf
+   cat /usr/share/remarkable/update.conf   # RM1/RM2
+   grep IMG_VERSION /etc/os-release        # Paper Pro / Move
    ```
 
-3. On supported 3.27.x firmware, enable handwriting capture:
+3. On 3.27.x or 3.29.1.0, enable handwriting capture:
 
    ```sh
    cp /home/root/xovi/exthome/appload/nextcloud-calendar/xovi/nextcloudCalendarSend.qmd /home/root/xovi/exthome/qt-resource-rebuilder/
    ```
 
-4. On exactly 3.27.3.0, optionally enable the Meeting Notes icon shortcut (on 3.29.1.0, e.g. the
-   Paper Pro Move, use `packaging/xovi/nextcloudCalendarLauncher-3.29.1.0.qmd` from the source instead; the
-   3.27.3.0 hook crashes xochitl there):
+4. Optionally enable the Meeting Notes icon shortcut. On exactly 3.27.3.0 use the command
+   below; on exactly 3.29.1.0 (e.g. the Paper Pro Move) copy `nextcloudCalendarLauncher-3.29.1.0.qmd`
+   from the same folder instead. Never use the 3.27.3.0 hook on 3.29: it crashes xochitl. If the
+   calendar icon is hidden on the home screen, set `ButtonVisible=true` under `[Calendar]` in
+   `/home/root/.config/remarkable/xochitl.conf` while xochitl is stopped:
 
    ```sh
    cp /home/root/xovi/exthome/appload/nextcloud-calendar/xovi/nextcloudCalendarLauncher.qmd /home/root/xovi/exthome/qt-resource-rebuilder/
